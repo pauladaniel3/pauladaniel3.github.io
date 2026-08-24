@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login de Acesso</title>
+<style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:linear-gradient(135deg,#4facfe,#00f2fe);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+body.dark{
+    background:linear-gradient(135deg,#1e272e,#2f3640);
+}
+
+body.dark .login-box{
+    background:#2f3640;
+    color:white;
+}
+
+.login-box{
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    width:350px;
+    text-align:center;
+    box-shadow:0 8px 20px rgba(0,0,0,0.2);
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:1px solid #ccc;
+    border-radius:8px;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    background:#4facfe;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+button:hover{
+    transform:scale(1.05);
+    transition:0.3s;
+}
+
+.toggle-dark{
+    position:absolute;
+    top:20px;
+    right:20px;
+    width:auto;
+    padding:10px;
+    border-radius:50%;
+}
+
+.recuperar-btn{
+    background:none;
+    border:none;
+    color:#4facfe;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+#erro{
+    color:red;
+    margin-top:10px;
+}
+</style>
+</head>
+<body>
+
+<button class="toggle-dark" onclick="toggleDark()">🌙</button>
+
+<div class="login-box">
+    <img src="c:\Users\SEEMG\Downloads\tecnologia.jpg" width="100" alt="Logo">
+    <h2>Login de Acesso</h2>
+
+    <form onsubmit="return validarLogin()">
+        <input type="text" id="usuario" placeholder="Usuário" required>
+        <input type="password" id="senha" placeholder="Senha" required>
+
+        <button type="button" onclick="mostrarSenha()">👁 Mostrar senha</button>
+
+        <br><br>
+        <label>
+            <input type="checkbox"> Lembrar-me
+        </label>
+
+        <br><br>
+        <button type="submit">Entrar</button>
+    </form>
+
+    <!-- botão fora do formulário -->
+    <button type="button" onclick="recuperarSenha()" class="recuperar-btn">
+        Esqueci minha senha
+    </button>
+<p>
+    <a href="cadastro.html" style="color:#4facfe; text-decoration:none;">
+        Cadastrar-se
+    </a>
+</p>
+
+<script>
+function toggleDark(){
+    document.body.classList.toggle('dark');
+}
+
+function mostrarSenha(){
+    let senha = document.getElementById('senha');
+    senha.type = senha.type === 'password' ? 'text' : 'password';
+}
+
+function recuperarSenha(){
+    let usuario = prompt('Digite seu usuário:');
+    let codigo = prompt('Digite o código de recuperação:');
+
+    if(usuario === 'admin' && codigo === 'SEG123'){
+        alert('Sua senha é: 1234');
+    } else {
+        alert('Usuário ou código inválido!');
+    }
+}
+
+function validarLogin(){
+    let usuario = document.getElementById('usuario').value;
+    let senha = document.getElementById('senha').value;
+
+    if(senha.length < 4){
+        document.getElementById('erro').innerText = 'Senha muito curta!';
+        return false;
+    }
+
+    if(usuario === 'admin' && senha === '1234'){
+        window.location.href = 'portfolio.html';
+        return false;
+    } else {
+        document.getElementById('erro').innerText = 'Usuário ou senha incorretos!';
+        return false;
+    }
+}
+</script>
+
+</body>
+</html>
